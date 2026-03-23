@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<!-- Copyright 2015 Adobe Systems Incorporated.  All rights reserved. -->
+<meta charset="utf-8">
+<title>NDD Browser Document</title>
+<link rel="stylesheet" type="text/css" href="css/NDD_Browser_UI_Main.css" />
+<script type="text/javascript" src="../../Shared/jQuery/jquery.min.js"></script>
+<script type="text/javascript" src="../../Shared/jQuery/Internationalization/jquery.i18n.properties-1.0.9.js"></script>
+<script type="text/javascript" src="../scripts/NDD_Constants.js"></script>
+<script type="text/javascript" src="scripts/NDD_Browser_UI_Main.js"></script>
+</head>
+
+<body onLoad="initBrowserUI();" onResize="initBrowserUI();">
+  <script>
+    window.getUrlVars = function(url) {
+      'use strict';
+
+      if (!url) {
+        return;
+      }
+
+      var vars = {};
+      url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+      });
+      return vars;
+    };
+
+    window.getThemeFromGETParam = function(url) {
+      'use strict';
+      var urlVars = window.getUrlVars(url), ret = '';
+      if (urlVars) {
+        ret = urlVars.theme;
+      }
+
+      return ret;
+    };
+    
+    var theme = getThemeFromGETParam(window.location.href);
+    if (theme === 'dark') {
+      document.body.style.backgroundColor = "#323232";
+    } else if (theme === 'midDark') {
+      document.body.style.backgroundColor = "#484848";
+    } else if (theme === 'midLight') {
+      document.body.style.backgroundColor = "#cacaca";
+    } else if (theme === 'light') {
+      document.body.style.backgroundColor = "#f0f0f0";
+    }
+    
+  </script>
+<iframe id="detailFrame" onload='onLoadIframe(this);'/>
+</body>
+</html>
